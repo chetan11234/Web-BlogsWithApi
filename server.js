@@ -1,19 +1,6 @@
 
 
 
-// app.get("/get_User", async (req, res) => {
-//     try {
-//         const response = await axios({
-//             method: 'get',
-//             baseURL: "http://localhost:3000",
-//             url: "/get"
-//         });
-//         res.render("index.ejs", { userBlogs: response.data });
-//         console.log(response.data);
-//     } catch (error) {
-//         res.render("index.ejs", { error: "error in fetching the user Blogs. " });
-//     }
-// });
 
 import express from "express";
 import axios from "axios";
@@ -24,6 +11,22 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 const userKey = "akfddfk-324NKNS-sdsldd";
+
+app.get("/get_User", async (req, res) => {
+    try {
+        const response = await axios({
+            method: 'get',
+            baseURL: "http://localhost:3000",
+            url: "/get"
+        });
+        //res.render("index.ejs", { userBlogs: response.data });
+        console.log(response.data);
+        res.json(response.data);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+});
+
 
 app.post("/post", async (req, res) => {
 
