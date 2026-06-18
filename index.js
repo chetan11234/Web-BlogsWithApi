@@ -19,6 +19,18 @@ app.get("/get", (req, res) => {
     res.json(web_blogs);
 });
 
+app.get("/get/:blogId", (req, res) => {
+    console.log("call made");
+    const blogId = req.params.blogId;
+    const blogIndex = web_blogs.findIndex((blogs) => blogs.id == blogId);
+    if (blogIndex != -1) {
+        console.log(web_blogs[blogIndex]);
+        res.json(web_blogs[blogIndex]);
+    } else {
+        res.status(404).json({ error: "No blog with this ${blogId} id found." });
+    }
+});
+
 app.post("/post", (req, res) => {
     const userResponse = req.body;
     userResponse.id = web_blogs.length + 1;// create id property if didn't exist.

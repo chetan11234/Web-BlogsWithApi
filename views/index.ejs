@@ -9,22 +9,30 @@
 <body>
     <section>
         <div id="postBlock">
-
+            <form action="/blogForm" method="post">
+                <button type="submit" >Publish</button>
+            </form>
         </div>
         <% 
         if(locals.userBlogs){
-            userBlogs.forEach(element => {
+            userBlogs.forEach((element) => {
                 %>
                 <div>
-                    <span><%= userBlogs.title %></span>
+                    <span><%= element.title %></span>
                     <div>
-                        <%= userBlogs.description %>
+                        <%= element.description %>
                     </div>
-                    <form id ="editDeleteForm" method="patch">
-                       <button type="submit" value="Edit" formaction="/edit"></button> 
-                       <button type="submit" value="Delete" formaction= "<%=`/patch/${locals.userBlogs.id}`%>"></button> 
+                    <div>
+                    <form id ="editForm" method="post">
+                        <input type="hidden" name="_method" value="PATCH">
+                       <button type="submit" value="Edit" formaction="<%=`/edit/${element.id}`%>">Edit</button> 
+                        
                     </form>
-                    
+                    <form id="deleteForm" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" value="Delete" formaction= "<%=`/delete/${element.id}`%>">Delete</button>
+                    </form>
+                    </div>
                 </div>
                 <%
             });

@@ -12,18 +12,21 @@
         <label for="title">
             Title:
         </label>
-        <input type="text" name="title" value = <%= locals.blog.title %>>
+        <input type="text" name="title" value="<%=userBlogs.title%>">
         <label for="description">
             Description:
         </label>
-        <input type="text" name ="description" value="<%= locals.blog.description%>">
-        <button type="submit" value="submit" formaction= <%=`/patch/${locals.blog.id}`%>>Submit</button>
+        <input type="text" name ="description" value="<%=userBlogs.description%>">
+        
+        
+        <input type="hidden" name="_method" value="PATCH">
+        <button type="submit" value="submit" formaction= <%=`/patch/${userBlogs.id}`%>>Submit</button>
     </form>
-    <%if(locals.blog.editedAt != ""){
+    <%if(userBlogs.editedAt != ""){
         %>
-        <span>Last updated on : <%= locals.blog.editedAt %></span>
+        <span>Last updated on : <%=userBlogs.editedAt %></span>
     <%}%>
-    <span>Published on : <%= locals.blog.postedAt %></span>
+    <span>Published on : <%=userBlogs.postedAt %></span>
     </section>
 </body>
 </html>
