@@ -5,6 +5,7 @@ import ejs from "ejs";
 import methodOverride from "method-override";
 const port = 5000;
 const app = express();
+app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride(function (req, res) {

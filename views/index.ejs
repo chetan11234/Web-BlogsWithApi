@@ -6,38 +6,59 @@
     <link rel="stylesheet" href="/styles/main.css">
     <title>User Blogs</title>
 </head>
-<body>
-    <section>
-        <div id="postBlock">
-            <form action="/blogForm" method="post">
-                <button type="submit" >Publish</button>
+<body class="page page-home">
+    <main class="home-shell">
+        <section class="hero-panel">
+            <div class="hero-copy">
+                <p class="eyebrow">Personal Publishing Space</p>
+                <h1>Your Stories, Notes, and Fresh Ideas</h1>
+                <p class="hero-text">Create a post, revisit older thoughts, and keep your writing collection organized in one place.</p>
+            </div>
+            <form class="publish-form" action="/blogForm" method="post">
+                <button class="primary-button" type="submit">Publish</button>
             </form>
-        </div>
-        <% 
-        if(locals.userBlogs){
-            userBlogs.forEach((element) => {
-                %>
+        </section>
+
+        <section class="blog-section">
+            <div class="section-heading">
                 <div>
-                    <span><%= element.title %></span>
-                    <div>
-                        <%= element.description %>
-                    </div>
-                    <div>
-                    <form id ="editForm" method="post">
-                        <input type="hidden" name="_method" value="PATCH">
-                       <button type="submit" value="Edit" formaction="<%=`/edit/${element.id}`%>">Edit</button> 
-                        
-                    </form>
-                    <form id="deleteForm" method="post">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" value="Delete" formaction= "<%=`/delete/${element.id}`%>">Delete</button>
-                    </form>
-                    </div>
+                    <p class="section-label">Blog Collection</p>
+                    <h2>Published Entries</h2>
                 </div>
-                <%
-            });
-        }
-        %>
-    </section>
+                <% if (locals.userBlogs && userBlogs.length) { %>
+                    <span class="post-count"><%= userBlogs.length %> post<%= userBlogs.length === 1 ? "" : "s" %></span>
+                <% } %>
+            </div>
+
+            <% if (locals.userBlogs && userBlogs.length) { %>
+                <div class="blog-grid">
+                    <% userBlogs.forEach((element) => { %>
+                        <article class="blog-card">
+                            <div class="blog-card__content">
+                                <h3 class="blog-card__title"><%= element.title %></h3>
+                                <p class="blog-card__description"><%= element.description %></p>
+                            </div>
+                            <div class="blog-card__actions">
+                                <form class="action-form" method="post">
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button class="ghost-button" type="submit" value="Edit" formaction="<%=`/edit/${element.id}`%>">Edit</button>
+                                </form>
+                                <form class="action-form" method="post">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="danger-button" type="submit" value="Delete" formaction="<%=`/delete/${element.id}`%>">Delete</button>
+                                </form>
+                            </div>
+                        </article>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <article class="empty-state">
+                    <p class="empty-state__label">Nothing published yet</p>
+                    <h3>Start your first blog entry.</h3>
+                    <p>Use the publish button above to create your first post and it will appear here.</p>
+                </article>
+            <% } %>
+        </section>
+    </main>
 </body>
 </html>

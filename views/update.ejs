@@ -4,29 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Blog</title>
+    <link rel="stylesheet" href="/styles/update.css">
 </head>
-<body>
-    <section>
-        <h1>Write your Blog</h1>
-    <form method="post"> 
-        <label for="title">
-            Title:
-        </label>
-        <input type="text" name="title" value="<%=userBlogs.title%>" autofocus>
-        <label for="description">
-            Description:
-        </label>
-        <textarea name ="description" rows="15" cols="55"><%=userBlogs.description%></textarea>
-        
-        
-        <input type="hidden" name="_method" value="PATCH">
-        <button type="submit" value="submit" formaction= <%=`/patch/${userBlogs.id}`%>>Submit</button>
-    </form>
-    <%if(userBlogs.editedAt != ""){
-        %>
-        <span>Last updated on : <%=userBlogs.editedAt %></span>
-    <%}%>
-    <span>Published on : <%=userBlogs.postedAt %></span>
-    </section>
+<body class="page page-update">
+    <main class="update-shell">
+        <section class="update-panel">
+            <div class="panel-copy">
+                <p class="eyebrow">Edit Mode</p>
+                <h1>Refine your published post</h1>
+                <p class="panel-text">Update the title, sharpen the description, and keep your published writing current.</p>
+            </div>
+
+            <form class="update-form" method="post">
+                <label class="field" for="title">
+                    <span>Title</span>
+                    <input id="title" type="text" name="title" value="<%= userBlogs.title %>" autofocus>
+                </label>
+
+                <label class="field field--large" for="description">
+                    <span>Description</span>
+                    <textarea id="description" name="description" rows="12"><%= userBlogs.description %></textarea>
+                </label>
+
+                <input type="hidden" name="_method" value="PATCH">
+                <button class="primary-button" type="submit" value="submit" formaction="<%=`/patch/${userBlogs.id}`%>">Save Changes</button>
+            </form>
+
+            <div class="meta-row">
+                <% if (userBlogs.editedAt != "") { %>
+                    <span class="meta-chip">Last updated: <%= userBlogs.editedAt %></span>
+                <% } %>
+                <span class="meta-chip">Published: <%= userBlogs.postedAt %></span>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

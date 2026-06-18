@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publish Blog</title>
-    <link rel="stylesheet" href="/styles/form.css">
+    <link rel="stylesheet" href="/styles/post.css">
 </head>
-<body>
-    <div>
-        <form method="post">
-        <div class="titleBlock">
-            <input type="text" name="title" placeholder="Enter your title here" >
-        </div>
-        <div class="descriptionBlock">
-            <input type="text" name="description" placeholder="Enter your description here">
-        </div>
-        <button type="submit" value="Publish" formaction="/post">Publish</button>
-        </form>
-    </div>
+<body class="page page-compose">
+    <main class="compose-shell">
+        <section class="compose-panel">
+            <div class="panel-copy">
+                <p class="eyebrow">New Story</p>
+                <h1>Publish a fresh blog post</h1>
+                <p class="panel-text">Capture the idea while it is still vivid. Add a clear title and write the post in your own voice.</p>
+            </div>
+
+            <form class="compose-form" method="post">
+                <label class="field" for="title">
+                    <span>Title</span>
+                    <input id="title" type="text" name="title" placeholder="Enter your title here" autofocus>
+                </label>
+
+                <label class="field field--large" for="description">
+                    <span>Description</span>
+                    <textarea id="description" name="description" rows="10" placeholder="Enter your description here"></textarea>
+                </label>
+
+                <button class="primary-button" type="submit" value="Publish" formaction="/post">Publish</button>
+            </form>
+        </section>
+    </main>
 </body>
 </html>
