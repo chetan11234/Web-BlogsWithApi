@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>User Blogs</title>
+</head>
+<body>
+    <section>
+        <div id="postBlock">
+
+        </div>
+        <% 
+        if(locals.userBlogs){
+            userBlogs.forEach(element => {
+                %>
+                <div>
+                    <span><%= userBlogs.title %></span>
+                    <div>
+                        <%= userBlogs.description %>
+                    </div>
+                    <form id ="editDeleteForm" method="patch">
+                       <button type="submit" value="Edit" formaction="/edit"></button> 
+                       <button type="submit" value="Delete" formaction= "<%=`/patch/${locals.userBlogs.id}`%>"></button> 
+                    </form>
+                    
+                </div>
+                <%
+            });
+        }
+        %>
+    </section>
+</body>
+</html>

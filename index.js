@@ -4,6 +4,9 @@ const app = express();
 const port = 3000;
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());/*It is used here because from application post requests body is in
+json format.
+*/
 const masterKey = "akfddfk-324NKNS-sdsldd";
 
 function exactTimestamp() {
@@ -17,9 +20,7 @@ app.get("/get", (req, res) => {
 });
 
 app.post("/post", (req, res) => {
-    console.log(req.body);
     const userResponse = req.body;
-    console.log(userResponse);
     userResponse.id = web_blogs.length + 1;// create id property if didn't exist.
     userResponse.postedAt = exactTimestamp();
     userResponse.editedAt = "";
@@ -28,7 +29,6 @@ app.post("/post", (req, res) => {
 });
 
 app.patch("/update/:blogId", (req, res) => {
-    console.log("patch is working");
     const blogId = req.params.blogId;
     const blogIndex = web_blogs.findIndex((blog) => blog.id == blogId);
     if (blogIndex != -1) {
@@ -43,6 +43,7 @@ app.patch("/update/:blogId", (req, res) => {
 
 app.delete("/delete/:blogId", (req, res) => {
     const userKey = req.get('key');
+    console.log("delete request is sent via application.");
     if (userKey === masterKey) {
         const blogId = req.params.blogId;
         if (blogId != -1) {

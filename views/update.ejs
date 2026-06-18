@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Blog</title>
+</head>
+<body>
+    <section>
+        <h1>Write your Blog</h1>
+    <form method="post"> 
+        <label for="title">
+            Title:
+        </label>
+        <input type="text" name="title" value = <%= locals.blog.title %>>
+        <label for="description">
+            Description:
+        </label>
+        <input type="text" name ="description" value="<%= locals.blog.description%>">
+        <button type="submit" value="submit" formaction= <%=`/patch/${locals.blog.id}`%>>Submit</button>
+    </form>
+    <%if(locals.blog.editedAt != ""){
+        %>
+        <span>Last updated on : <%= locals.blog.editedAt %></span>
+    <%}%>
+    <span>Published on : <%= locals.blog.postedAt %></span>
+    </section>
+</body>
+</html>
